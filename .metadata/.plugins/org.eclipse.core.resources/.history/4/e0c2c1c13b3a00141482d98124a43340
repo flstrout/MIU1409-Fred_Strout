@@ -14,11 +14,11 @@ var jsonData = {
 			},
 			{
 				"Question": "What is your chat username, including the host?",
-				"Answer": "My chat username is Fred Strout and I use AIM."
+				"Answer": "I don't remember. I never use it."
 			},
 			{
 				"Question": "In which time zone do you reside?",
-				"Answer": "I reside in the Central Time Zone."
+				"Answer": "Central"
 			},
 			{
 				"Question": "Why are you in the Mobile Development Program?",
