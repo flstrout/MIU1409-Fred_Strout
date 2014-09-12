@@ -1,5 +1,6 @@
 =run
-LAST_LAUNCH_TIMESTAMP=1410499305774
+LAST_LAUNCH_TIMESTAMP=1410553694855
 StroutFred_AboutMe\:launchMode=run
-StroutFred_AboutMe\:launchShortcut=com.appcelerator.titanium.mobile.ui.ios.simulator.ipad.launchShortcut.iPad
+StroutFred_AboutMe\:launchShortcut=com.appcelerator.titanium.mobile.ui.ios.simulator.ipad.launchShortcut.iPad Retina (64-bit)
 eclipse.preferences.version=1
+preference.studio.perspective.version=103
