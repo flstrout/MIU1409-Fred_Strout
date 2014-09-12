@@ -6,7 +6,7 @@
 // Data
 var jsonData = {
 	"GroupA":{
-		"headerText": "The First Six Questions",
+		"headerText": "The First Six Questions:",
 		"Questions": [
 			{
 				"Question": "What is your name?",
@@ -35,7 +35,7 @@ var jsonData = {
 		]
 	},
 	"GroupB":{
-		"headerText": "The Next Five or More Questions",
+		"headerText": "The Next Five Questions:",
 		"Questions": [
 			{
 				"Question": "What is your favorite food?",
@@ -64,14 +64,17 @@ var jsonData = {
 // Open the Answer Window
 var showDetail = function(dataSource){
 	var detailWindow = Ti.UI.createWindow({
-		backgroundColor: "#000",
-		title: "Answer"
+		backgroundColor: "#8fbc8f",
+		title: "Answer",
+		statusBarStyle: 2,
+		barColor: "#014421",
+		titleAttributes: {color: "#ccc"}
 	});
 	
 	var detailViewText = Ti.UI.createLabel({
 		text: dataSource.detail,
 		font: {fontSize: 20, fontFamily: "Arial", fontWeight: "bold"},
-		color: "#fff",
+		color: "#444",
 		top: 20,
 		left: 10,
 		right: 10
@@ -96,7 +99,9 @@ for (var n in jsonData){
 			font: {fontSize: 12, fontFamily: "Arial"},
 			title: jsonData[n].Questions[o].Question,
 			detail: jsonData[n].Questions[o].Answer,
-			hasChild: true
+			hasChild: true,
+			backgroundColor: "#eee",
+			color: "#014421"
 		});
 		tableSection.add(sectionDetail);
 	};
