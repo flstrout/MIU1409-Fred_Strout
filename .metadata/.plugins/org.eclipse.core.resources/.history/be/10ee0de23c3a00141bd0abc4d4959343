@@ -93,7 +93,7 @@ for (var n in jsonData){
 	// *Important* Send Variables outside the Loop so they won't get overwritten
 	lists.push(tableSection);
 	
-	// Format the Section Rows and fill with data
+	// Fill in the Sections with Data
 	for (o in jsonData[n].Questions){ 
 		var sectionDetail = Ti.UI.createTableViewRow({
 			font: {fontSize: 12, fontFamily: "Arial"},
