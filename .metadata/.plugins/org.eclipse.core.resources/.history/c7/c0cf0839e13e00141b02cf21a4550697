@@ -403,93 +403,17 @@ var showDetail = function(dataSource){
 		left: 165,
 		right: 5
 	});
-	// Appearance Button
 	var buttonAppearance = Ti.UI.createLabel({
 		text: "Appearance",
 		backgroundColor: "#f3f3f4",
-		borderColor: "#000065",
-		borderRadius: 3,
-		borderWidth: 2,
-		font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold", fontStyle: "underline"},
-		textAlign: "center",
-		color: "#000065",
-		top: dataPersonality.top + 45,
-		left: 10,
-		width: "140",
-		height: "35",
-		zIndex: 1
+		width: "100%",
+		font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+		color: "#d6ff5f",
+		top: dataPersonality.top + 40,
+		left: 45,
+		right: 45
 	});
-	
-	var buttonAppearShadow = Ti.UI.createLabel({
-		backgroundColor: "#000099",
-		borderColor: "#000099",
-		borderRadius: 3,
-		borderWidth: 2,
-		top: buttonAppearance.top + 3,
-		left: 13,
-		width: "140",
-		height: "35",
-		zIndex: 0
-	});
-	// Temperament Button
-	var buttonTemperament = Ti.UI.createLabel({
-		text: "Temperament",
-		backgroundColor: "#f3f3f4",
-		borderColor: "#000065",
-		borderRadius: 3,
-		borderWidth: 2,
-		font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold", fontStyle: "underline"},
-		textAlign: "center",
-		color: "#000065",
-		top: dataPersonality.top + 45,
-		right: 13,
-		width: "140",
-		height: "35",
-		zIndex: 1
-	});
-	
-	var buttonTemperShadow = Ti.UI.createLabel({
-		backgroundColor: "#000099",
-		borderColor: "#000099",
-		borderRadius: 3,
-		borderWidth: 2,
-		top: buttonTemperament.top + 2,
-		right: 10,
-		width: "140",
-		height: "35",
-		zIndex: 0
-	});
-	// Lineage Button
-	var buttonLineage = Ti.UI.createLabel({
-		text: "Lineage",
-		backgroundColor: "#f3f3f4",
-		borderColor: "#000065",
-		borderRadius: 3,
-		borderWidth: 2,
-		font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold", fontStyle: "underline"},
-		textAlign: "center",
-		color: "#000065",
-		top: buttonTemperament.top + 45,
-		left: 90,
-		right: 90,
-		width: "140",
-		height: "35",
-		zIndex: 1
-	});
-	
-	var buttonLineageShadow = Ti.UI.createLabel({
-		backgroundColor: "#000099",
-		borderColor: "#000099",
-		borderRadius: 3,
-		borderWidth: 2,
-		top: buttonLineage.top + 3,
-		left: 93,
-		right: 98,
-		width: "140",
-		height: "35",
-		zIndex: 0
-	});
-	detailWindow.add(dataBreed,dataPronunciation,labelOrigin,dataOrigin,labelLifeSpan,dataLifeSpan,labelHeight,dataHeight,labelWeight,dataWeight,labelActivityLevel,dataActivityLevel,labelTrainability,dataTrainability,labelColor,dataColor,labelCoat,dataCoat,labelPersonality,dataPersonality,labelGroup,dataGroup,labelObedience,dataObedience,labelGuardAbility,dataGuardAbility,labelWatchAbility,dataWatchAbility,imageView,imageSlider,buttonAppearance,buttonAppearShadow,buttonTemperament,buttonTemperShadow,buttonLineage,buttonLineageShadow);
+	detailWindow.add(dataBreed,dataPronunciation,labelOrigin,dataOrigin,labelLifeSpan,dataLifeSpan,labelHeight,dataHeight,labelWeight,dataWeight,labelActivityLevel,dataActivityLevel,labelTrainability,dataTrainability,labelColor,dataColor,labelCoat,dataCoat,labelPersonality,dataPersonality,labelGroup,dataGroup,labelObedience,dataObedience,labelGuardAbility,dataGuardAbility,labelWatchAbility,dataWatchAbility,imageView,imageSlider,buttonAppearance);
 	navWindow.openWindow(detailWindow);
 };
 var lists = [];

@@ -137,6 +137,7 @@ var jsonData = {
 			  }
 		]
 };
+
 // Open the Answer Window
 var showDetail = function(dataSource){
 	var selectedImage = dataSource.image2;
@@ -215,6 +216,7 @@ var showDetail = function(dataSource){
 		left: 5,
 		right: 5
 	});
+	
 	var labelWeight = Ti.UI.createLabel({
 		text: "Weight:",
 		font: {fontSize: 14, fontFamily: "Helvetica Neue"},
@@ -352,6 +354,7 @@ var showDetail = function(dataSource){
 		value: 1,
 		left: "40%"
 	});
+	
 	var imageView = Ti.UI.createImageView({
 			image: "images/" + selectedImage,
 			top: labelOrigin.top,
@@ -360,6 +363,7 @@ var showDetail = function(dataSource){
 			borderRadius: 3,
 			height: 125
 		});
+		
 	imageSlider.addEventListener("touchend", function(e){
 		this.value = Math.round(e.value);
 		if (imageSlider.value === 0){
@@ -371,6 +375,8 @@ var showDetail = function(dataSource){
 		};
 		imageView.image = "images/" + selectedImage;
 	});
+	
+	
 	var labelGuardAbility = Ti.UI.createLabel({
 		text: "Guard Ability:",
 		font: {fontSize: 14, fontFamily: "Helvetica Neue"},
@@ -403,148 +409,56 @@ var showDetail = function(dataSource){
 		left: 165,
 		right: 5
 	});
-	// Appearance Button
-	var buttonAppearance = Ti.UI.createLabel({
-		text: "Appearance",
-		backgroundColor: "#f3f3f4",
-		borderColor: "#000065",
-		borderRadius: 3,
-		borderWidth: 2,
-		font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold", fontStyle: "underline"},
-		textAlign: "center",
-		color: "#000065",
-		top: dataPersonality.top + 45,
-		left: 10,
-		width: "140",
-		height: "35",
-		zIndex: 1
-	});
-	
-	var buttonAppearShadow = Ti.UI.createLabel({
-		backgroundColor: "#000099",
-		borderColor: "#000099",
-		borderRadius: 3,
-		borderWidth: 2,
-		top: buttonAppearance.top + 3,
-		left: 13,
-		width: "140",
-		height: "35",
-		zIndex: 0
-	});
-	// Temperament Button
-	var buttonTemperament = Ti.UI.createLabel({
-		text: "Temperament",
-		backgroundColor: "#f3f3f4",
-		borderColor: "#000065",
-		borderRadius: 3,
-		borderWidth: 2,
-		font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold", fontStyle: "underline"},
-		textAlign: "center",
-		color: "#000065",
-		top: dataPersonality.top + 45,
-		right: 13,
-		width: "140",
-		height: "35",
-		zIndex: 1
-	});
-	
-	var buttonTemperShadow = Ti.UI.createLabel({
-		backgroundColor: "#000099",
-		borderColor: "#000099",
-		borderRadius: 3,
-		borderWidth: 2,
-		top: buttonTemperament.top + 2,
-		right: 10,
-		width: "140",
-		height: "35",
-		zIndex: 0
-	});
-	// Lineage Button
-	var buttonLineage = Ti.UI.createLabel({
-		text: "Lineage",
-		backgroundColor: "#f3f3f4",
-		borderColor: "#000065",
-		borderRadius: 3,
-		borderWidth: 2,
-		font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold", fontStyle: "underline"},
-		textAlign: "center",
-		color: "#000065",
-		top: buttonTemperament.top + 45,
-		left: 90,
-		right: 90,
-		width: "140",
-		height: "35",
-		zIndex: 1
-	});
-	
-	var buttonLineageShadow = Ti.UI.createLabel({
-		backgroundColor: "#000099",
-		borderColor: "#000099",
-		borderRadius: 3,
-		borderWidth: 2,
-		top: buttonLineage.top + 3,
-		left: 93,
-		right: 98,
-		width: "140",
-		height: "35",
-		zIndex: 0
-	});
-	detailWindow.add(dataBreed,dataPronunciation,labelOrigin,dataOrigin,labelLifeSpan,dataLifeSpan,labelHeight,dataHeight,labelWeight,dataWeight,labelActivityLevel,dataActivityLevel,labelTrainability,dataTrainability,labelColor,dataColor,labelCoat,dataCoat,labelPersonality,dataPersonality,labelGroup,dataGroup,labelObedience,dataObedience,labelGuardAbility,dataGuardAbility,labelWatchAbility,dataWatchAbility,imageView,imageSlider,buttonAppearance,buttonAppearShadow,buttonTemperament,buttonTemperShadow,buttonLineage,buttonLineageShadow);
+	detailWindow.add(dataBreed,dataPronunciation,labelOrigin,dataOrigin,labelLifeSpan,dataLifeSpan,labelHeight,dataHeight,labelWeight,dataWeight,labelActivityLevel,dataActivityLevel,labelTrainability,dataTrainability,labelColor,dataColor,labelCoat,dataCoat,labelPersonality,dataPersonality,labelGroup,dataGroup,labelObedience,dataObedience,labelGuardAbility,dataGuardAbility,labelWatchAbility,dataWatchAbility,imageView,imageSlider);
 	navWindow.openWindow(detailWindow);
 };
+
 var lists = [];
 // Set the Headers
-var tableSection = Ti.UI.createTableViewSection({
-	title: "BREEDS"
-});
+//for (var n in jsonData){ 
+	var tableSection = Ti.UI.createTableViewSection({
+		title: "BREEDS"
+	});
 	
-// *Important* Send Variables outside the Loop so they won't get overwritten
-lists.push(tableSection);
+	// *Important* Send Variables outside the Loop so they won't get overwritten
+	lists.push(tableSection);
 	
-// Format the Section Rows and fill with data
-for (o in jsonData.Breeds){ 
-	var sectionDetail = Ti.UI.createTableViewRow({
-		height: 50,
-		font: {fontSize: 16, fontFamily: "Arial"},
-		title: jsonData.Breeds[o].TITLE,
-		breed: jsonData.Breeds[o].BREED,
-		pronunciation: jsonData.Breeds[o].PRONUNCIATION,
-		trainability:jsonData.Breeds[o].TRAINABILITY,
-		obedience:jsonData.Breeds[o].OBEDIENCE,
-		guard:jsonData.Breeds[o].GUARD,
-		watch:jsonData.Breeds[o].WATCH,
-		activity:jsonData.Breeds[o].ACTIVITY,
-		life:jsonData.Breeds[o].LIFE,
-		origin:jsonData.Breeds[o].ORIGIN,
-		personality:jsonData.Breeds[o].PERSONALITY,
-		weightBreed:jsonData.Breeds[o].WEIGHT,
-		heightBreed:jsonData.Breeds[o].HEIGHT,
-		colorBreed:jsonData.Breeds[o].COLOR,
-		coat:jsonData.Breeds[o].COAT,
-		group:jsonData.Breeds[o].GROUP,
-		appearance:jsonData.Breeds[o].APPEARANCE,
-		temperament:jsonData.Breeds[o].TEMPERAMENT,
-		lineage:jsonData.Breeds[o].LINEAGE,
-		sources:jsonData.Breeds[o].SOURCES,
-		image1:jsonData.Breeds[o].IMAGE1,
-		image2:jsonData.Breeds[o].IMAGE2,
-		image3:jsonData.Breeds[o].IMAGE3,
-		hasChild: true,
-		backgroundColor: "#eee",
-		color: "#014421"
-	});
-	tableSection.add(sectionDetail);
-};
-
-var openDetail = function(){
-	var detailTextData = dataSource.appearance;
-	var modalWindow = Ti.UI.createWindow({
-		modal: true
-	});
-	var detailText = Ti.UI.createLabel({
-		text: detailTextData
-	});
-};
+	// Format the Section Rows and fill with data
+	for (o in jsonData.Breeds){ 
+		var sectionDetail = Ti.UI.createTableViewRow({
+			height: 50,
+			font: {fontSize: 16, fontFamily: "Arial"},
+			title: jsonData.Breeds[o].TITLE,
+			breed: jsonData.Breeds[o].BREED,
+			pronunciation: jsonData.Breeds[o].PRONUNCIATION,
+			trainability:jsonData.Breeds[o].TRAINABILITY,
+			obedience:jsonData.Breeds[o].OBEDIENCE,
+			guard:jsonData.Breeds[o].GUARD,
+			watch:jsonData.Breeds[o].WATCH,
+			activity:jsonData.Breeds[o].ACTIVITY,
+			life:jsonData.Breeds[o].LIFE,
+			origin:jsonData.Breeds[o].ORIGIN,
+			personality:jsonData.Breeds[o].PERSONALITY,
+			weightBreed:jsonData.Breeds[o].WEIGHT,
+			heightBreed:jsonData.Breeds[o].HEIGHT,
+			colorBreed:jsonData.Breeds[o].COLOR,
+			coat:jsonData.Breeds[o].COAT,
+			group:jsonData.Breeds[o].GROUP,
+			appearance:jsonData.Breeds[o].APPEARANCE,
+			temperament:jsonData.Breeds[o].TEMPERAMENT,
+			lineage:jsonData.Breeds[o].LINEAGE,
+			sources:jsonData.Breeds[o].SOURCES,
+			image1:jsonData.Breeds[o].IMAGE1,
+			image2:jsonData.Breeds[o].IMAGE2,
+			image3:jsonData.Breeds[o].IMAGE3,
+			hasChild: true,
+			backgroundColor: "#eee",
+			color: "#014421"
+		});
+		
+		tableSection.add(sectionDetail);
+	};
+//};
 
 questions.setData(lists);
 questions.addEventListener("click", function(event){
