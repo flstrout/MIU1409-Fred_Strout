@@ -1,7 +1,7 @@
 =run
-LAST_LAUNCH_TIMESTAMP=1410995051573
+LAST_LAUNCH_TIMESTAMP=1411043071243
 StroutFred_AboutMe\:launchMode=run
-StroutFred_AboutMe\:launchShortcut=com.appcelerator.titanium.mobile.ui.ios.simulator.ipad.launchShortcut.iPad
+StroutFred_AboutMe\:launchShortcut=com.appcelerator.titanium.mobile.ui.ios.simulator.iphone.launchShortcut.iPhone Retina (4 inch 64-bit)
 StroutFred_InfoApp\:launchMode=run
 StroutFred_InfoApp\:launchShortcut=com.appcelerator.titanium.mobile.ui.ios.simulator.iphone.launchShortcut.iPhone Retina (4 inch 64-bit)
 eclipse.preferences.version=1

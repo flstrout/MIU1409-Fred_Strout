@@ -7,11 +7,11 @@ Ti.UI.setBackgroundColor('#333');
 
 // New Window => Navigation Window
 var tableWindow = Ti.UI.createWindow({
+	backgroundColor: "#1174c1",
 	title: "The Pet Store",
-	backgroundColor: "#014421",
 	statusBarStyle: 2,
-	barColor: "#014421",
-	titleAttributes: {color: "#ccc"}
+	barColor: "#000065",
+	titleAttributes: {color: "#d6ff5f"}
 });
 
 var navWindow = Ti.UI.iOS.createNavigationWindow({
@@ -19,11 +19,11 @@ var navWindow = Ti.UI.iOS.createNavigationWindow({
 });
 
  // Create Table
-var questions = Ti.UI.createTableView({
+var breeds = Ti.UI.createTableView({
 	top: 0,
 	style: Ti.UI.iPhone.TableViewStyle.GROUPED,
-	backgroundColor: "#8fbc8f",
-	separatorColor: "#014421"
+	backgroundColor: "#1174c1",
+	separatorColor: "#000065"
 });
 
 // json.js file link - where the rest of the app resides
