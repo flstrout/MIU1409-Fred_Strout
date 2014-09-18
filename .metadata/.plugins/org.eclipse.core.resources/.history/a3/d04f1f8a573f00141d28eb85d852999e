@@ -450,6 +450,7 @@ var showDetail = function(dataSource){
 			height: 125
 		});
 		
+		
 	/* All events effected by the slider must be encapsulated in its EventListener
 	function or at least in a function called by its EventListener function.*/
 	

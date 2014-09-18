@@ -426,9 +426,9 @@ var showDetail = function(dataSource){
 		right: 5
 	});
 	
-// **************************************
-// A lot of monotonous code - big gap to make the break easy to find
-// **************************************
+	// **************************************
+	
+	// A lot of monotonous code - big gap to find the break
 	
 	// Image Slider, Viewer and EventListener
 	var imageSlider = Ti.UI.createSlider({
@@ -450,9 +450,7 @@ var showDetail = function(dataSource){
 			height: 125
 		});
 		
-	/* All events effected by the slider must be encapsulated in its EventListener
-	function or at least in a function called by its EventListener function.*/
-	
+	// All events effected by the slider must be encapsulated in the EventListener function or at least called by it.
 	imageSlider.addEventListener("touchend", function(e){
 		this.value = Math.round(e.value);
 		
@@ -502,9 +500,9 @@ var showDetail = function(dataSource){
 		right: 5
 	});
 	
-// **************************************
-// A lot of monotonous code - big gap to make the break easy to find
-// **************************************
+	// **************************************
+	
+	// A lot of monotonous code - big gap to find the break
 	
 	// Buttons and Button Shadows
 	// Appearance
@@ -655,8 +653,6 @@ for (o in jsonData.Breeds){
 	tableSection.add(sectionDetail);
 };
 
-// **************************************
-// A lot of monotonous code - big gap to make the break easy to find
 // **************************************
 
 // The code for the Sources Button
