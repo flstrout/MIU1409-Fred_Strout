@@ -215,7 +215,7 @@ var showDetail = function(dataSource){
 		buttonClose.addEventListener("click", closeView);
 		buttonXout.addEventListener("click", closeView);
 		
-	scrollView.add(detailText)
+	scrollView.add(detailText);
 	modalView.add(scrollView,buttonXout,buttonClose,shadowClose);
 	detailWindow.add(tintView,modalView);
 };

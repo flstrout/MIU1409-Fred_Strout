@@ -157,23 +157,33 @@ var showDetail = function(dataSource){
 		zIndex: 3
 	});
 	var scrollView = Ti.UI.createScrollView({
-		top:3,
-		height: "87%",
+		top:19,
+		height: "82%",
 		showVerticalScrollIndicator: true
 	});
 	var detailText = Ti.UI.createLabel({
 		text: this.call,
-		top: 10,
+		top: 1,
 		left: 10,
 		width: 280,
 		font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
-		color: "#fff"
+		color: "#f3f3f4"
 	});
 	// close button
 		var closeView = function(e){
 			detailWindow.remove(tintView);
 			detailWindow.remove(modalView);
 		};
+		var buttonXout = Ti.UI.createLabel({
+			text: "X",
+			font: {fontSize: 11, fontFamily: "Arial", fontWeight: "bold"},
+			textAlign: "center",
+			color: "#f3f3f4",
+			top: 3,
+			width: 10,
+			right: 3,
+			zIndex: 1
+		});
 		var buttonClose = Ti.UI.createLabel({
 			text: "Close",
 			backgroundColor: "#f3f3f4",
@@ -203,8 +213,10 @@ var showDetail = function(dataSource){
 			zIndex: 0
 		});
 		buttonClose.addEventListener("click", closeView);
+		buttonXout.addEventListener("click", closeView);
+		
 	scrollView.add(detailText)
-	modalView.add(scrollView,buttonClose,shadowClose);
+	modalView.add(scrollView,buttonXout,buttonClose,shadowClose);
 	detailWindow.add(tintView,modalView);
 };
 	var selectedImage = dataSource.image2;
@@ -234,7 +246,9 @@ var showDetail = function(dataSource){
 		left: 10,
 		right: 5
 	});
-	// Left Column
+	
+	// Monotonous Code
+	// A whole lot of labels: labelName hard coded; dataName written by the for-in loop.
 	var labelOrigin = Ti.UI.createLabel({
 		text: "Origin:",
 		font: {fontSize: 14, fontFamily: "Helvetica Neue"},
@@ -411,6 +425,12 @@ var showDetail = function(dataSource){
 		left: 165,
 		right: 5
 	});
+	
+// **************************************
+// A lot of monotonous code - big gap to make the break easy to find
+// **************************************
+	
+	// Image Slider, Viewer and EventListener
 	var imageSlider = Ti.UI.createSlider({
 		top:labelActivityLevel.top + 2,
 		height: 2,
@@ -420,6 +440,7 @@ var showDetail = function(dataSource){
 		value: 1,
 		left: "40%"
 	});
+	
 	var imageView = Ti.UI.createImageView({
 			image: "images/" + selectedImage,
 			top: labelOrigin.top,
@@ -428,8 +449,13 @@ var showDetail = function(dataSource){
 			borderRadius: 3,
 			height: 125
 		});
+		
+	/* All events effected by the slider must be encapsulated in its EventListener
+	function or at least in a function called by its EventListener function.*/
+	
 	imageSlider.addEventListener("touchend", function(e){
 		this.value = Math.round(e.value);
+		
 		if (imageSlider.value === 0){
 			selectedImage = dataSource.image1;
 			} else if (imageSlider.value === 1){
@@ -437,8 +463,11 @@ var showDetail = function(dataSource){
 			} else {
 			selectedImage = dataSource.image3;
 		};
+		
 		imageView.image = "images/" + selectedImage;
 	});
+	
+	// More monotonous label code
 	var labelGuardAbility = Ti.UI.createLabel({
 		text: "Guard Ability:",
 		font: {fontSize: 14, fontFamily: "Helvetica Neue"},
@@ -447,6 +476,7 @@ var showDetail = function(dataSource){
 		left: 168,
 		right: 5
 	});
+	
 	var dataGuardAbility = Ti.UI.createLabel({
 		text: dataSource.guard,
 		font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold"},
@@ -471,7 +501,13 @@ var showDetail = function(dataSource){
 		left: 165,
 		right: 5
 	});
-	// Appearance Button
+	
+// **************************************
+// A lot of monotonous code - big gap to make the break easy to find
+// **************************************
+	
+	// Buttons and Button Shadows
+	// Appearance
 	var buttonAppearance = Ti.UI.createLabel({
 		text: "Appearance",
 		backgroundColor: "#f3f3f4",
@@ -500,7 +536,8 @@ var showDetail = function(dataSource){
 		height: "35",
 		zIndex: 0
 	});
-	// Temperament Button
+	
+	// Temperament
 	var buttonTemperament = Ti.UI.createLabel({
 		text: "Temperament",
 		backgroundColor: "#f3f3f4",
@@ -529,7 +566,8 @@ var showDetail = function(dataSource){
 		height: "35",
 		zIndex: 0
 	});
-	// Lineage Button
+	
+	// Lineage
 	var buttonLineage = Ti.UI.createLabel({
 		text: "Lineage",
 		backgroundColor: "#f3f3f4",
@@ -560,13 +598,20 @@ var showDetail = function(dataSource){
 		height: "35",
 		zIndex: 0
 	});
+	
+	// Make the buttons do something - openDetail->push call custom property
 	buttonAppearance.addEventListener("click", openDetail);
 	buttonTemperament.addEventListener("click", openDetail);
 	buttonLineage.addEventListener("click", openDetail);
+	
+	// Write everything to the UI - Display it all
 	detailWindow.add(dataBreed,dataPronunciation,labelOrigin,dataOrigin,labelLifeSpan,dataLifeSpan,labelHeight,dataHeight,labelWeight,dataWeight,labelActivityLevel,dataActivityLevel,labelTrainability,dataTrainability,labelColor,dataColor,labelCoat,dataCoat,labelPersonality,dataPersonality,labelGroup,dataGroup,labelObedience,dataObedience,labelGuardAbility,dataGuardAbility,labelWatchAbility,dataWatchAbility,imageView,imageSlider,buttonAppearance,shadowAppearance,buttonTemperament,shadowTemperament,buttonLineage,shadowLineage);
 	navWindow.openWindow(detailWindow);
 };
+
+// Make the Homepage list
 var lists = [];
+
 // Set the Headers
 var tableSection = Ti.UI.createTableViewSection({
 	title: "BREEDS"
@@ -605,13 +650,141 @@ for (o in jsonData.Breeds){
 		image3:jsonData.Breeds[o].IMAGE3,
 		hasChild: true,
 		backgroundColor: "#eee",
-		color: "#014421"
+		color: "#000065"
 	});
 	tableSection.add(sectionDetail);
 };
 
-questions.setData(lists);
-questions.addEventListener("click", function(event){
+// **************************************
+// A lot of monotonous code - big gap to make the break easy to find
+// **************************************
+
+// The code for the Sources Button
+var openSources = function(){
+	var tintViewSources = Ti.UI.createView({
+		backgroundColor: "#000",
+		opacity: .45,
+		zIndex: 2
+	});
+	
+	var modalViewSources = Ti.UI.createView({
+		top: 20,
+		left: 10,
+		height: 460,
+		width: 300,
+		backgroundColor: "#000065",
+		zIndex: 3
+	});
+	
+	// Display Sources Information
+	var text1Sources = Ti.UI.createLabel({
+		text: "Data Sources",
+		top: 20,
+		width: 280,
+		font: {fontSize: 18, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+		color: "#d6ff5f"
+	});
+	
+	var text2Sources = Ti.UI.createLabel({
+		text: "www.dogbreedinfo.com\nwww.petwave.com",
+		top: 40,
+		width: 280,
+		font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+		color: "#f3f3f4"
+	});
+	
+	var text3Sources = Ti.UI.createLabel({
+		text: "Image Sources",
+		top: 100,
+		width: 280,
+		font: {fontSize: 18, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+		color: "#d6ff5f"
+	});
+	
+	var text4Sources = Ti.UI.createLabel({
+		text: "www.dogbreedinfo.com\nwww.petwave.com\nwww.hdbackgroundpoint.com\nwww.dogbreedsites.com\nwww.chihuahuawardrobe.com\nwww.dog-breeds.findthebest.com\nwww.pedigreedatabase.com\nwww.puppydogweb.com\nwww.dogfactsforkids.com\nwww.fanshare.com\nwww.dogbreedplus.com",
+		top: 120,
+		width: 280,
+		font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+		color: "#f3f3f4"
+	});
+	
+	// close button
+		var closeView = function(e){
+			tableWindow.remove(tintViewSources);
+			tableWindow.remove(modalViewSources);
+		};
+		var buttonXoutSources = Ti.UI.createLabel({
+			text: "X",
+			font: {fontSize: 11, fontFamily: "Arial", fontWeight: "bold"},
+			textAlign: "center",
+			color: "#f3f3f4",
+			top: 3,
+			width: 10,
+			right: 3,
+			zIndex: 1
+		});
+		var buttonCloseSources = Ti.UI.createLabel({
+			text: "Close",
+			backgroundColor: "#f3f3f4",
+			borderColor: "#000065",
+			borderRadius: 3,
+			borderWidth: 2,
+			font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold", fontStyle: "underline"},
+			textAlign: "center",
+			color: "#000065",
+			top: 410,
+			left: 80,
+			right: 90,
+			width: "140",
+			height: "35",
+			zIndex: 1
+		});
+		var shadowCloseSources = Ti.UI.createLabel({
+			backgroundColor: "#000020",
+			borderColor: "#000020",
+			borderRadius: 3,
+			borderWidth: 2,
+			top: buttonCloseSources.top + 3,
+			left: 83,
+			right: 98,
+			width: "140",
+			height: "35",
+			zIndex: 0
+		});
+		buttonCloseSources.addEventListener("click", closeView);
+		buttonXoutSources.addEventListener("click", closeView);
+		
+	// Write everything to the UI - Display it all
+	modalViewSources.add(text1Sources,text2Sources,text3Sources,text4Sources,buttonXoutSources,buttonCloseSources,shadowCloseSources);
+	tableWindow.add(tintViewSources,modalViewSources);
+};
+
+// Create the Sources Button on the Homepage and point it to the code that makes it do something
+var buttonSources = Ti.UI.createButton({
+	title: "Sources",
+	top: 460,
+	borderColor: "#000065",
+	borderRadius: 15,
+	borderWidth: 2,
+	color: "#000065",
+	width: 110,
+	height: 32,
+});
+
+buttonSources.addEventListener("click", openSources);
+
+// Created By Label
+var createdBy = Ti.UI.createLabel({
+	text: "Created By: Fred Strout / MIU-1409",
+	font: {fontSize: 9, fontFamily: "Helvetica Neue"},
+	color: "#000065",
+	top: 335
+});
+
+breeds.setData(lists);
+breeds.addEventListener("click", function(event){
 	showDetail(event.source);
 });
-tableWindow.add(questions);
+
+tableWindow.add(breeds,createdBy,buttonSources);
