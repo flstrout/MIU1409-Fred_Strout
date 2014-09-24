@@ -1,0 +1,23 @@
+{
+	"target": "simulator",
+	"deployType": "development",
+	"deviceFamily": "iphone",
+	"iosSdkPath": "/Users/fredstrout/Library/Application Support/Titanium/mobilesdk/osx/3.3.0.GA/iphone",
+	"tiCoreHash": "77157e1ffaec640cf559356a147b6a4c",
+	"modulesHash": "d41d8cd98f00b204e9800998ecf8427e",
+	"modulesNativeHash": "d41d8cd98f00b204e9800998ecf8427e",
+	"gitHash": "787cd39",
+	"name": "CustomerRecovery",
+	"id": "com.fredstrout.CustomerRecovery",
+	"analytics": true,
+	"publisher": "fredstrout",
+	"url": "http://",
+	"version": "1.0",
+	"description": "",
+	"copyright": "2014 by fredstrout",
+	"guid": "98c071d7-ad5b-4eda-ade5-40b1d5431387",
+	"skipJSMinification": true,
+	"forceCopy": false,
+	"forceCopyAll": false,
+	"encryptJS": false
+}
