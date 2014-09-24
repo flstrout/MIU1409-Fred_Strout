@@ -1,0 +1,87 @@
+// Fred L. Strout
+// MIU ~ 1409
+// Utility App - Customer Recovery
+// Created On: 9/24/2014
+
+var manager = "Fred Strout";
+var position = "DM2";
+var homeStore = "11766-10 - Rayne, LA";
+
+var settingsJSON = {
+	"Opportunities": [
+			  {
+			  	"Customer":"Ken Kastner",
+			    "Date Created":"12/29/2013",
+			    "Opportunity":"Ordered a Big Mac, received a Qrtr Pounder.",
+			    "Promise":"One Big Mac Value Meal",
+			    "Promised By":"Fred Strout",
+			    "Quality?":"No",
+			    "Service?":"Yes",
+			    "Safety?":"No",
+			  }
+			  {
+			  	"Customer":"Jason Stelly",
+			    "Date Created":"12/24/2013",
+			    "Opportunity":"Hair in his Food.",
+			    "Promise":"Refund if he has the receipt; replace product otherwise.",
+			    "Promised By":"Sierra LaBorde",
+			    "Quality?":"Yes",
+			    "Service?":"No",
+			    "Safety?":"Yes",
+			  }
+			  {
+			  	"Customer":"Chris",
+			    "Date Created":"11/18/2013",
+			    "Opportunity":"Fries were Cold",
+			    "Promise":"Free Fresh Fry with a Free Upsize.",
+			    "Promised By":"Mackenzie David",
+			    "Quality?":"Yes",
+			    "Service?":"No",
+			    "Safety?":"No",
+			  }
+		]
+};
+
+// Create the Table
+var openOpps = Ti.UI.createTableView({
+	top: 0,
+	// Conditional not needed; we're using a Navigation Window which is iOS platform specific.
+	style: Ti.UI.iPhone.TableViewStyle.GROUPED
+});
+	
+var list = [];
+	// Populate Section Headers & Footers
+	for (var n in jsonData){ 
+		var tableSection = Ti.UI.createTableViewSection({
+			headerTitle: jsonData[n].headerText,
+			footerTitle: jsonData[n].footerText
+		});
+		// Send Variables outside the Loop so they won't get overwritten
+		lists.push(tableSection);
+		// Populate the Sections with Data
+		for (o in jsonData[n].tasks){ 
+			var sectionDetail = Ti.UI.createTableViewRow({
+				title: jsonData[n].tasks[o].task,
+				detail: jsonData[n].tasks[o].desc,
+				image: jsonData[n].tasks[o].image,
+				strength: jsonData[n].tasks[o].strength,
+				agility: jsonData[n].tasks[o].agility,
+				endurance: jsonData[n].tasks[o].endurance,
+				awareness: jsonData[n].tasks[o].awareness,
+				intelligence: jsonData[n].tasks[o].intelligence,
+				tenacity: jsonData[n].tasks[o].tenacity,
+				combat: jsonData[n].tasks[o].combat,
+				surveillance: jsonData[n].tasks[o].surveillance,
+				technology: jsonData[n].tasks[o].technology,
+				hasChild: true
+			});
+			tableSection.add(sectionDetail);
+			//sectionDetail.addEventListener("click", showDetail);
+		};
+	};
+	
+	openOpps.setData(lists);
+	openOpps.addEventListener("click", function(event){
+		showDetail(event.source);
+	});
+	tableWindow.add(tasks);

@@ -1,7 +1,7 @@
 // Fred L. Strout
 // MIU ~ 1409
 // Utility App - Customer Recovery
-// Created On: 9/15/2014
+// Created On: 9/23/2014
 
 Ti.UI.setBackgroundColor('#333');
 
@@ -13,6 +13,22 @@ var tableWindow = Ti.UI.createWindow({
 	barColor: "#333",
 	titleAttributes: {color: "#ccc"}
 });
+
+// Create Menu Bar
+var menuBar = Ti.UI.createView({
+	backgroundColor: "#ffcc00",
+	top: 0,
+	height: 50
+});
+
+var titleMB = Ti.UI.createLabel({
+	text: "Home",
+	font: {fontSize: 20, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+	color: "#333"
+});
+
+menuBar.add(titleMB);
+tableWindow.add(menuBar);
 
 var navWindow = Ti.UI.iOS.createNavigationWindow({
 	window: tableWindow
@@ -27,5 +43,5 @@ var opportunities = Ti.UI.createTableView({
 });
 
 // json.js file link - where the rest of the app resides
-//var loadData = require("jsondata");
+var loadData = require("opportunitiesJSON");
 navWindow.open();

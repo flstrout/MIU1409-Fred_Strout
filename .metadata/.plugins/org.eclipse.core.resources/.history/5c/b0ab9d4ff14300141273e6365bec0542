@@ -1,0 +1,14 @@
+// Fred L. Strout
+// MIU ~ 1409
+// Utility App - Customer Recovery
+// Created On: 9/24/2014
+
+var settingsJSON = {
+	"Settings": [
+			  {
+			  	"Manager":"Fred Strout",
+			    "Position":"DM2",
+			    "Home Store":"11766-10 - Rayne, LA",
+			  }
+		]
+};

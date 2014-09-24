@@ -1,0 +1,39 @@
+// Fred L. Strout
+// MIU ~ 1409
+// Utility App - Customer Recovery
+// Created On: 9/24/2014
+
+var settingsJSON = {
+	"Opportunities": [
+			  {
+			  	"Customer":"Ken Kastner",
+			    "Date Created":"12/29/2013",
+			    "Opportunity":"Ordered a Big Mac, received a Qrtr Pounder.",
+			    "Promise":"One Big Mac Value Meal",
+			    "Promised By":"Fred Strout",
+			    "Quality?":"No",
+			    "Service?":"Yes",
+			    "Safety?":"No",
+			  }
+			  {
+			  	"Customer":"Jason Stelly",
+			    "Date Created":"12/24/2013",
+			    "Opportunity":"Hair in his Food.",
+			    "Promise":"Refund if he has the receipt; replace product otherwise.",
+			    "Promised By":"Sierra LaBorde",
+			    "Quality?":"Yes",
+			    "Service?":"No",
+			    "Safety?":"Yes",
+			  }
+			  {
+			  	"Customer":"Chris",
+			    "Date Created":"11/18/2013",
+			    "Opportunity":"Fries were Cold",
+			    "Promise":"Free Fresh Fry with a Free Upsize.",
+			    "Promised By":"Mackenzie David",
+			    "Quality?":"Yes",
+			    "Service?":"No",
+			    "Safety?":"No",
+			  }
+		]
+};
