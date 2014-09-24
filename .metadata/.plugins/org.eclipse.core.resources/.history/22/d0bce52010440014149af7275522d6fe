@@ -20,7 +20,7 @@ var navWindow = Ti.UI.iOS.createNavigationWindow({
 
  // Create Table
 var opportunities = Ti.UI.createTableView({
-	top: 30,
+	top: 0,
 	style: Ti.UI.iPhone.TableViewStyle.GROUPED,
 	backgroundColor: "#bf0c0c",
 	separatorColor: "#bf0c0c"
