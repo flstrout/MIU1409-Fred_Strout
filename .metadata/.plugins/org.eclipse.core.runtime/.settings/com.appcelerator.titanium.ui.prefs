@@ -1,13 +1,13 @@
 =run
 CustomerRecovery\:launchMode=run
 CustomerRecovery\:launchShortcut=com.appcelerator.titanium.mobile.ui.ios.simulator.ipad.launchShortcut.iPad
-LAST_LAUNCH_TIMESTAMP=1411615242356
+LAST_LAUNCH_TIMESTAMP=1411655553597
 StroutFred_AboutMe\:launchMode=run
 StroutFred_AboutMe\:launchShortcut=com.appcelerator.titanium.mobile.ui.ios.simulator.iphone.launchShortcut.iPhone Retina (4 inch 64-bit)
 StroutFred_CustomerRecovery\:launchMode=run
 StroutFred_CustomerRecovery\:launchShortcut=com.appcelerator.titanium.mobile.ui.ios.simulator.iphone.launchShortcut.iPhone Retina (4 inch 64-bit)
 StroutFred_InfoApp\:launchMode=run
-StroutFred_InfoApp\:launchShortcut=com.appcelerator.titanium.mobile.ui.ios.simulator.ipad.launchShortcut.iPad
+StroutFred_InfoApp\:launchShortcut=com.appcelerator.titanium.mobile.ui.ios.simulator.iphone.launchShortcut.iPhone Retina (4 inch 64-bit)
 StroutFred_UtilityApp\:launchMode=run
 StroutFred_UtilityApp\:launchShortcut=com.appcelerator.titanium.mobile.ui.ios.simulator.iphone.launchShortcut.iPhone Retina (4 inch 64-bit)
 eclipse.preferences.version=1

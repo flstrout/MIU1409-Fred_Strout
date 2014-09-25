@@ -43,9 +43,95 @@ var oppJSON = {
 			  }
 		]
 };
+
+// Add a new record
 var showAdd = function(){
 	
-	var addWindow = Ti.UI.createWindow({
+	// Submit Data Popup Modal
+	var openSaveModal = function(){
+		
+		// Change Popup Message - Not Yet Available
+		var saveSettings = function(){
+			lblSaveChanges.text = "Sorry!";
+			lblSaveChanges.color = "#f00";
+			lblSaveDesc.text = "This Feature is\nnot yet available.";
+		};
+		
+		var closeSaveModal = function(){
+			addNewWindow.remove(tintView);
+			addNewWindow.remove(saveModal);
+		};
+		
+		// Tint the Main Window and Open the Modal View
+		var tintView = Ti.UI.createView({
+			backgroundColor: "#000",
+			opacity: .60,
+			zIndex: 2
+		});
+		
+		var saveModal = Ti.UI.createView({
+			borderRadius: 5,
+			top: 85,
+			height: "40%",
+			width: "80%",
+			backgroundColor: "#000",
+			zIndex: 3
+		});
+		
+		// Popup Message
+		var lblSaveChanges = Ti.UI.createLabel({
+			text: "Confirm Submission",
+			top: 30,
+			font: {fontSize: 20, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			color: "#eee"
+		});
+		
+		var lblSaveDesc = Ti.UI.createLabel({
+			text: "Do you want to save\nthis information\nto the data file?",
+			textAlign: "center",
+			top: 55,
+			font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			color: "#eee"
+		});
+		
+		// Popup Buttons
+		var lblSave = Ti.UI.createLabel({
+			text: "Submit",
+			top: 168,
+			right: "50%",
+			borderColor: "#eee",
+			borderWidth: 2,
+			color: "#0f0",
+			width: 129,
+			height: 35,
+			font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			textAlign: "center"
+		});
+		
+		lblSave.addEventListener("click", saveSettings);
+		
+		var lblCancel = Ti.UI.createLabel({
+			text: "Cancel",
+			top: 168,
+			left: "50%",
+			borderColor: "#eee",
+			borderWidth: 2,
+			color: "#f00",
+			width: 129,
+			height: 35,
+			font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			textAlign: "center"
+		});
+		
+		lblCancel.addEventListener("click", closeSaveModal);
+		
+		saveModal.add(lblSaveChanges, lblSaveDesc, lblSave, lblCancel);
+		addNewWindow.add(tintView, saveModal);
+		
+	};
+	
+	// Create the Window
+	var addNewWindow = Ti.UI.createWindow({
 		backgroundColor: "#bf0c0c",
 		title: "Customer Recovery",
 		statusBarStyle: 2,
@@ -53,6 +139,9 @@ var showAdd = function(){
 		titleAttributes: {color: "#ccc"},
 		backButtonTitle: "Back"
 	});
+	
+	// Creates a Scroll View - needed when the keyboard is open
+	var addWindow = Ti.UI.createScrollView({});
 	
 	// Create Menu Bar
 	var addMenuBar = Ti.UI.createView({
@@ -163,6 +252,7 @@ var showAdd = function(){
 		backgroundColor: "#eee"
 	});
 	
+	// Form Buttons
 	var butSave = Ti.UI.createLabel({
 		text: "Save",
 		borderColor: "#333",
@@ -178,6 +268,8 @@ var showAdd = function(){
 		textAlign: "center"
 	});
 	
+	butSave.addEventListener("click", openSaveModal);
+	
 	var butCancel = Ti.UI.createLabel({
 		text: "-Cancel-",
 		font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
@@ -189,23 +281,140 @@ var showAdd = function(){
 		textAlign: "center"
 	});
 	
+	butCancel.addEventListener("click", function(){
+		addNewWindow.close();
+	});
+	
 	addMenuBar.add(titleAMB);
 	addWindow.add(addMenuBar, lblOpportunity, lblCustomer, lblPromise, lblRequired1, lblRequired2,
 				lblRequired3, txtOpportunity, txtCustomer, txtPromise, butSave, butCancel, tagline);
-	navWindow.openWindow(addWindow);
+	addNewWindow.add(addWindow);
+	navWindow.openWindow(addNewWindow);
 };
 	
 
 // Settings Window
 var showSettings = function(){
 	
-	var settingsWindow = Ti.UI.createWindow({
+	// Show/Hide the Password Feature
+	var showPassword = function(){
+		txtPassword.passwordMask = false;
+		lblShowPassword.visible = false;
+		lblHidePassword.visible = true;
+	};
+	
+	var hidePassword = function(){
+		txtPassword.passwordMask = true;
+		lblShowPassword.visible = true;
+		lblHidePassword.visible = false;
+	};
+	
+	// Save Settings Popup Modal
+	var openSaveModal = function(){
+		
+		// Save the Current Values to the Global Variables
+		var saveSettings = function(){
+			manager = txtManager.value;
+			position = txtPosition.value;
+			homeStore = txtHomeStore.value;
+			eid = txtEID.value;
+			password = txtPassword.value;
+			settingsWindow.remove(tintView);
+			settingsWindow.remove(saveModal);
+			setWindow.close();
+		};
+		
+		// Popup Cancel Button closes the settingsWindow and reopens it with the original data
+		var closeSaveModal = function(){
+			setWindow.close();
+			showSettings();
+		};
+		
+		// Tint the Main Window and Open the Modal View
+		var tintView = Ti.UI.createView({
+			backgroundColor: "#000",
+			opacity: .60,
+			zIndex: 2
+		});
+		
+		var saveModal = Ti.UI.createView({
+			borderRadius: 5,
+			top: 85,
+			height: "40%",
+			width: "80%",
+			backgroundColor: "#000",
+			zIndex: 3
+		});
+		
+		// Popup Modal Message
+		var lblSaveChanges = Ti.UI.createLabel({
+			text: "Save Changes?",
+			top: 30,
+			font: {fontSize: 20, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			color: "#eee"
+		});
+		
+		var lblSaveDesc = Ti.UI.createLabel({
+			text: "Would you like to\nsave changes to\n the data file?",
+			textAlign: "center",
+			top: 55,
+			font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			color: "#eee"
+		});
+		
+		// Popup Buttons
+		var lblSave = Ti.UI.createLabel({
+			text: "Save",
+			top: 168,
+			right: "50%",
+			borderColor: "#eee",
+			borderWidth: 2,
+			color: "#0f0",
+			width: 129,
+			height: 35,
+			font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			textAlign: "center"
+		});
+		
+		lblSave.addEventListener("click", saveSettings);
+		
+		var lblCancel = Ti.UI.createLabel({
+			text: "Cancel",
+			top: 168,
+			left: "50%",
+			borderColor: "#eee",
+			borderWidth: 2,
+			color: "#f00",
+			width: 129,
+			height: 35,
+			font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			textAlign: "center"
+		});
+		
+		lblCancel.addEventListener("click", closeSaveModal);
+		
+		saveModal.add(lblSaveChanges, lblSaveDesc, lblSave, lblCancel);
+		settingsWindow.add(tintView, saveModal);
+	};
+	
+	// Form Cancel Button Function
+	var closeSettings = function(){
+		setWindow.close();
+	};
+	
+	// Creates the Settings Window
+	var setWindow = Ti.UI.createWindow({
 		backgroundColor: "#bf0c0c",
 		title: "Customer Recovery",
 		statusBarStyle: 2,
 		barColor: "#333",
 		titleAttributes: {color: "#ccc"},
 		backButtonTitle: "Back"
+	});
+	
+	// Creates a Scroll View - needed when the keyboard is open
+	var settingsWindow = Ti.UI.createScrollView({
+		
 	});
 	
 	// Create Menu Bar
@@ -269,6 +478,26 @@ var showSettings = function(){
 		left: 13
 	});
 	
+	var lblShowPassword = Ti.UI.createLabel({
+		visible: true,
+		text: "*Show Password",
+		font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+		color: "#0f0",
+		top: lblEID.top + lblEID.height + 60,
+		height: 14,
+		right: 13
+	});
+	
+	var lblHidePassword = Ti.UI.createLabel({
+		visible: false,
+		text: "*Hide Password",
+		font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+		color: "#0f0",
+		top: lblEID.top + lblEID.height + 60,
+		height: 14,
+		right: 13
+	});
+	
 	// Input Fields
 	var txtManager = Ti.UI.createTextField({
 		value: manager,
@@ -294,6 +523,10 @@ var showSettings = function(){
 		backgroundColor: "#eee"
 	});
 	
+	// Tells the lblShowPassword and lblHidePassword labels what to do when clicked.
+	lblShowPassword.addEventListener("click", showPassword);
+	lblHidePassword.addEventListener("click", hidePassword);
+	 
 	var txtHomeStore = Ti.UI.createTextField({
 		value: homeStore,
 		font: {fontSize: 18, fontFamily: "Helvetica Neue"},
@@ -321,6 +554,7 @@ var showSettings = function(){
 	var txtPassword = Ti.UI.createTextField({
 		value: password,
 		font: {fontSize: 18, fontFamily: "Helvetica Neue"},
+		passwordMask: true,
 		top: lblPassword.top + 20,
 		left: 10,
 		right: 10,
@@ -330,6 +564,7 @@ var showSettings = function(){
 		backgroundColor: "#eee"
 	});
 	
+	// Form Buttons
 	var butSave = Ti.UI.createLabel({
 		text: "Save",
 		borderColor: "#333",
@@ -345,6 +580,8 @@ var showSettings = function(){
 		textAlign: "center"
 	});
 	
+	butSave.addEventListener("click", openSaveModal);
+	
 	var butCancel = Ti.UI.createLabel({
 		text: "-Cancel-",
 		font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
@@ -356,14 +593,102 @@ var showSettings = function(){
 		textAlign: "center"
 	});
 	
+	butCancel.addEventListener("click", closeSettings);
+	
 	settingsMenuBar.add(titleSMB);
 	settingsWindow.add(settingsMenuBar, lblManager, lblPosition, lblHomeStore, lblEID, lblPassword,
-						txtManager, txtPosition, txtHomeStore, txtEID, txtPassword, butSave, butCancel, tagline);
-	navWindow.openWindow(settingsWindow);
+						txtManager, txtPosition, txtHomeStore, txtEID, txtPassword, butSave,
+						butCancel, tagline, lblShowPassword, lblHidePassword);
+	setWindow.add(settingsWindow);
+	navWindow.openWindow(setWindow);
 };
 	
 var showDetail = function(dataSource){
 	
+	// Creates the Make It Right Popup Modal
+	var openSaveModal = function(){
+		
+		// Change Popup Message - Not Yet Available
+		var saveSettings = function(){
+			lblSaveChanges.text = "Sorry!";
+			lblSaveChanges.color = "#f00";
+			lblSaveDesc.text = "This Feature is\nnot yet available.";
+		};
+		
+		var closeSaveModal = function(){
+			detailWindow.remove(tintView);
+			detailWindow.remove(saveModal);
+		};
+		
+		// Tint the Main Window and Open the Modal View
+		var tintView = Ti.UI.createView({
+			backgroundColor: "#000",
+			opacity: .60,
+			zIndex: 2
+		});
+		
+		var saveModal = Ti.UI.createView({
+			borderRadius: 5,
+			top: 85,
+			height: "40%",
+			width: "80%",
+			backgroundColor: "#000",
+			zIndex: 3
+		});
+		
+		// Popup Message
+		var lblSaveChanges = Ti.UI.createLabel({
+			text: "Make It Right!!!",
+			top: 30,
+			font: {fontSize: 20, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			color: "#eee"
+		});
+		
+		var lblSaveDesc = Ti.UI.createLabel({
+			text: "Would you like to close\nthis Recovery Opportunity?",
+			textAlign: "center",
+			top: 55,
+			font: {fontSize: 16, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			color: "#eee"
+		});
+		
+		// Popup Buttons
+		var lblSave = Ti.UI.createLabel({
+			text: "Make It Right!!!",
+			top: 168,
+			right: "50%",
+			borderColor: "#eee",
+			borderWidth: 2,
+			color: "#0f0",
+			width: 129,
+			height: 35,
+			font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			textAlign: "center"
+		});
+		
+		lblSave.addEventListener("click", saveSettings);
+		
+		var lblCancel = Ti.UI.createLabel({
+			text: "Cancel",
+			top: 168,
+			left: "50%",
+			borderColor: "#eee",
+			borderWidth: 2,
+			color: "#f00",
+			width: 129,
+			height: 35,
+			font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
+			textAlign: "center"
+		});
+		
+		lblCancel.addEventListener("click", closeSaveModal);
+		
+		saveModal.add(lblSaveChanges, lblSaveDesc, lblSave, lblCancel);
+		detailWindow.add(tintView, saveModal);
+		
+	};
+	
+	// Creates the Opportunty Detail Window
 	var detailWindow = Ti.UI.createWindow({
 		backgroundColor: "#bf0c0c",
 		title: "Customer Recovery",
@@ -397,6 +722,7 @@ var showDetail = function(dataSource){
 		left: 13
 	});
 	
+	// Labels
 	var lblDate = Ti.UI.createLabel({
 		text: "Date:",
 		font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
@@ -433,6 +759,7 @@ var showDetail = function(dataSource){
 		left: 13
 	});
 	
+	// Data
 	var dataCustomer = Ti.UI.createLabel({
 		text: dataSource.title,
 		font: {fontSize: 18, fontFamily: "Helvetica Neue", fontWeight: "bold"},
@@ -456,6 +783,8 @@ var showDetail = function(dataSource){
 		top: lblOpportunity.top + 16,
 		left: 8
 	});
+	
+	// Highlighted the Promised Resolution
 	var customBackground = Ti.UI.createView({
 		borderColor: "#222",
 		borderWidth: 2,
@@ -489,6 +818,7 @@ var showDetail = function(dataSource){
 		left: 8
 	});
 	
+	// Popup Modal buttons
 	var butMakeItRight = Ti.UI.createLabel({
 		text: "Make it Right!",
 		borderColor: "#333",
@@ -504,6 +834,8 @@ var showDetail = function(dataSource){
 		textAlign: "center"
 	});
 	
+	butMakeItRight.addEventListener("click", openSaveModal);
+	
 	var butCancel = Ti.UI.createLabel({
 		text: "-Cancel-",
 		font: {fontSize: 14, fontFamily: "Helvetica Neue", fontWeight: "bold"},
@@ -515,6 +847,10 @@ var showDetail = function(dataSource){
 		textAlign: "center"
 	});
 	
+	butCancel.addEventListener("click", function(){
+		detailWindow.close();
+	});
+	
 	menuBar.add(titleMB);
 	detailWindow.add(menuBar, lblCustomer, lblDate, lblOpportunity, lblPromise, lblPromisedBy, dataCustomer,
 					dataDate, dataOpportunity, dataPromise, dataPromisedBy, butMakeItRight, butCancel, customBackground, tagline);
@@ -523,7 +859,7 @@ var showDetail = function(dataSource){
 
 var list = [];
 
- // Header
+ // Home Screen Table Header
 var headView = Ti.UI.createView({ // Base View
 	backgroundColor: "#bf0c0c"
 });
@@ -534,6 +870,7 @@ var headLabel = Ti.UI.createLabel({ // Label applied to the Base View
 	font: {fontWeight: "bold"},
 	left: 5
 });
+
 headView.add(headLabel);
 
 var tableSection = Ti.UI.createTableViewSection({ // Set the Sections Header to the headView variable
@@ -559,7 +896,6 @@ for (o in oppJSON.Opportunities){
 	});
 	
 	tableSection.add(sectionDetail);
-	//sectionDetail.addEventListener("click", showDetail);
 };
 
 // Create Menu Bar
@@ -577,6 +913,7 @@ var titleMB = Ti.UI.createLabel({
 	color: "#333"
 });
 
+// Creates the Menu Bar Buttons
 var butAdd = Ti.UI.createButton({
 	title: "Add",
 	left: 15
@@ -587,6 +924,7 @@ var butSettings = Ti.UI.createButton({
 	right: 15
 });
 
+// Footer Tagline
 var tagline = Ti.UI.createLabel({
 	borderColor: "#333",
 	borderWidth: 2,
